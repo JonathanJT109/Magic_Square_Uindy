@@ -1,13 +1,27 @@
 #include <stdio.h>
-
 #define N 20
 
-void print(int list[N][N], int sums[], int n, int a){
-   int i, j;
-  for(i = 0; i < n; i++) printf(" %d ", sums[i]);
-  printf("| %d\n", sums[n]);
-  printf(" ----------------\n");
-  //for(i = )
+void print(int list[N][N], int sums[], int n){
+  int i, j;
+  for(i = 0; i < n; i++) printf("%3d ", sums[i]);
+  printf("|%3d\n ", sums[n]);
+  for(int i = 0; i < n * 5; i++) printf("-");
+  printf("\n");
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n + 1; j++){
+      if(j == n){
+        printf("|%3d", sums[n + i + 1]);
+        continue;
+      } 
+      printf("%3d ", list[i][j]);
+    }
+    printf("\n");
+  }
+  printf(" "); 
+  for(int i = 0; i < n * 5; i++) printf("-");   
+  printf("\n");
+  for(int i = 0; i < n * 5 - n; i++) printf(" ");
+  printf("|%3d ", sums[n * 2 + 1]);
   printf("\n");
 }
 
@@ -30,12 +44,52 @@ int main() {
     }
     a++;
   }
-  sums[n] = square[0][n-1] + square[(int)(n / 2.0 - .5)][(int)(n / 2.0 - .5)] + square[n-1][0]; 
+  sums[a] = 0;
+  for(row = n - 1; row >= 0; row--){
+    for(col = 0; col < n; col++){
+      if(row == (n - col - 1)){
+        sums[a] += square[row][col];
+      } 
+    }
+  }
+  a++;
+  for (col = 0; col < n; col++) {
+    sums[a] = 0;
+    for (row = 0; row < n; row++) {
+       sums[a] += square[row][col]; 
+    }
+    a++;
+  }
+  sums[a] = 0;
+  for(row = 0; row < n; row++){
+    for(col = 0; col < n; col++){
+      if(row == col){
+        sums[a] += square[row][col];
+      } 
+    }
+  }
   
-  print(square, sums, n, a);
+  print(square, sums, n);
+  
   
   for(row = 0; row < a - 1; row++) if(sums[row] != sums[row + 1]) isMagic = 0;
   
   printf((isMagic == 1) ? "MAGIC!" : "Not Magic");
   printf("\n");
 }
+
+// 28  32  36  40 | 34
+//--------------------
+//  1   2   3   4 | 10
+//  5   6   7   8 | 26
+//  9  10  11  12 | 42
+// 13  14  15  16 | 58
+//--------------------
+//                | 34
+// 15  15  15 | 15
+//----------------
+//  8   1   6 | 15
+//  3   5   7 | 15
+//  4   9   2 | 15
+//----------------
+//            | 15
