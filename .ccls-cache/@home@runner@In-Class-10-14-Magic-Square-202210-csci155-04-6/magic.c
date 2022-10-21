@@ -1,5 +1,5 @@
 /*
-If you saw the comment in the last submit. Please ignore. I accidentaly made a directory named main and the program could not execute the file. But now it should work fine.
+If you saw the comment in the last submit. Please ignore. I accidentaly made a directory named main (because I used clang to run my program) and the program could not execute the file. But now it should work fine. I also fixed the sum of rows and columns.
 */
 #include <stdio.h>
 #define N 20
@@ -7,8 +7,8 @@ If you saw the comment in the last submit. Please ignore. I accidentaly made a d
 void print(int list[N][N], int sums[], int n){
   int i, j;
   for(i = 0; i < n; i++) printf("%3d ", sums[i]);
-  printf("|%3d\n ", sums[n]);
-  for(int i = 0; i < n * 5; i++) printf("-");
+  printf("|%3d\n", sums[n]);
+  for(int i = 0; i < n * 4 + 4; i++) printf("-");
   printf("\n");
   for(i = 0; i < n; i++){
     for(j = 0; j < n + 1; j++){
@@ -20,8 +20,7 @@ void print(int list[N][N], int sums[], int n){
     }
     printf("\n");
   }
-  printf(" "); 
-  for(int i = 0; i < n * 5; i++) printf("-");   
+  for(int i = 0; i < n * 4 + 4; i++) printf("-");   
   printf("\n");
   for(int i = 0; i < n * 5 - n; i++) printf(" ");
   printf("|%3d ", sums[n * 2 + 1]);
@@ -76,7 +75,7 @@ int main() {
   
   
   for(row = 0; row < a - 1; row++) if(sums[row] != sums[row + 1]) isMagic = 0;
-  
+
   printf((isMagic == 1) ? "MAGIC!" : "Not Magic");
   printf("\n");
 }
