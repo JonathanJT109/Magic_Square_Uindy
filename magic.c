@@ -1,3 +1,6 @@
+/*
+If you saw the comment in the last submit. Please ignore. I accidentaly made a directory named main and the program could not execute the file. But now it should work fine.
+*/
 #include <stdio.h>
 #define N 20
 
@@ -40,7 +43,7 @@ int main() {
   for (row = 0; row < n; row++) {
     sums[a] = 0;
     for (col = 0; col < n; col++) {
-       sums[a] += square[row][col]; 
+       sums[a] += square[col][row]; 
     }
     a++;
   }
@@ -56,7 +59,7 @@ int main() {
   for (col = 0; col < n; col++) {
     sums[a] = 0;
     for (row = 0; row < n; row++) {
-       sums[a] += square[row][col]; 
+       sums[a] += square[col][row]; 
     }
     a++;
   }
